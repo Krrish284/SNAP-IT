@@ -1,0 +1,8 @@
+[project]
+name = "snap-url-shortener"
+version = "1.0.0"
+description = "Snap — a URL shortener with click analytics on Vercel serverless."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

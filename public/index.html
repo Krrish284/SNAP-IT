@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snap — short links with click analytics</title>
+  <meta name="description" content="Snap shortens any long URL into a shareable code and tracks every click — count, timestamp, and referrer.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!--
+    SNAP / DIRECTION CONTRACT
+    THESIS: Snap is a measuring instrument, not a marketing hero. The category
+      default is a soft SaaS landing; this surface refuses it for a paper
+      ledger that does its job in the first viewport.
+    OWN-WORLD: "Paper & punch tape". Warm teletype paper, dense ink, one
+      signal-red action accent, dashed perforation rules. Instrument Sans for
+      UI; IBM Plex Mono for every code and measured number, tabular figures.
+      The short code is a stamped object; the dashboard is a ruled ledger.
+    STORY: Paste a long URL, get a snapped code, and read real click counts —
+      every figure on the page comes from a database row.
+    FIRST VIEWPORT: wordmark top bar; headline "Long URLs, snapped short.";
+      full-width paste field with a red "Snap it" primary action; the result
+      punches in as a perforated strip stamped SNAPPED; a ruled three-step
+      ledger below proves the mechanism.
+    FORM: static HTML/CSS/JS served by the FastAPI app; contract seed key:
+      SNAP-TAPE-2026.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the
+      finish review, the verdict, and DESIGN.md.
+  -->
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="wordmark" href="/" aria-label="Snap home">
+        <span class="wordmark-mark" aria-hidden="true">S</span>
+        <span>Snap</span>
+      </a>
+      <nav class="topbar-nav" aria-label="Primary">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+        <a class="nav-link" href="/api/health" data-check="health">API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell shell--narrow">
+    <section class="hero">
+      <h1>Long URLs, snapped&nbsp;short.</h1>
+      <p class="hero-lead">Paste any link. Snap makes a tiny code and keeps score — <em>every click</em>, when it happened, and where it came from.</p>
+
+      <form id="shorten-form" class="urlform" novalidate>
+        <div class="input-row">
+          <label class="live" for="url-input">Paste a URL to shorten</label>
+          <input id="url-input" class="input" type="url" name="url" inputmode="url"
+                 autocomplete="url" spellcheck="false" autofocus
+                 placeholder="https://example.com/some/very/long/path…"
+                 aria-describedby="url-hint">
+          <button id="snap-btn" class="btn btn-accent" type="submit">
+            <span class="btn-label">Snap it</span>
+          </button>
+        </div>
+        <p id="url-hint" class="step-d" style="margin:0.1rem 0 0">http and https only. You can paste with or without the scheme.</p>
+        <div id="form-err" class="err" role="alert"></div>
+      </form>
+
+      <div id="result" class="result" hidden>
+        <div class="result-head">
+          <span class="result-label">Your short link</span>
+          <span class="stamp">SNAPPED</span>
+        </div>
+        <a id="result-url" class="short-url" href="#" target="_blank" rel="noopener noreferrer"></a>
+        <p id="result-original" class="result-original"></p>
+        <div class="result-meta">
+          <span id="result-clicks" class="result-clicks"></span>
+          <div class="actions">
+            <button id="copy-btn" class="btn btn-ghost btn-sm" type="button">Copy</button>
+            <a id="visit-btn" class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noopener noreferrer">Visit</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps" aria-label="How Snap works">
+        <div class="step">
+          <span class="step-n">01 / PASTE</span>
+          <p class="step-t">Drop the long URL</p>
+          <p class="step-d">Any http or https link, pasted with or without its scheme.</p>
+        </div>
+        <div class="step">
+          <span class="step-n">02 / SNAP</span>
+          <p class="step-t">Get a tiny code</p>
+          <p class="step-d">A collision-safe random code, stamped and ready to share.</p>
+        </div>
+        <div class="step">
+          <span class="step-n">03 / READ</span>
+          <p class="step-t">Watch the clicks</p>
+          <p class="step-d">Count, time, and referrer logged for every visit.</p>
+        </div>
+      </div>
+
+      <div class="pitch">
+        <div>
+          <h2>Every click counts.</h2>
+          <p>Snap logs each visit with its timestamp and referrer, then ranks your links on the dashboard.</p>
+        </div>
+        <a class="btn btn-accent" href="/dashboard">Open the dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Snap — short links, kept score.</span>
+      <span id="footer-health">database · checking…</span>
+    </div>
+  </footer>
+
+  <div class="live" aria-live="polite" id="live-region"></div>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

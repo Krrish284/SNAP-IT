@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — Snap</title>
+  <meta name="description" content="Snap dashboard: top links, click counts, and recent activity.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="wordmark" href="/" aria-label="Snap home">
+        <span class="wordmark-mark" aria-hidden="true">S</span>
+        <span>Snap</span>
+      </a>
+      <nav class="topbar-nav" aria-label="Primary">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+        <a class="nav-link nav-hide" href="/api/health">API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="page">
+      <h1>Click ledger</h1>
+      <p class="page-lead">Every snap, ranked by the clicks it earned. All figures come straight from the click stream.</p>
+
+      <div class="statband" id="statband">
+        <div class="stat">
+          <span class="stat-label">Total links</span>
+          <span class="stat-num" id="stat-links">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total clicks</span>
+          <span class="stat-num" id="stat-clicks">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Last click</span>
+          <span class="stat-num" id="stat-last" style="font-size:1.15rem;line-height:1.9rem">—</span>
+          <span class="stat-sub" id="stat-last-detail"></span>
+        </div>
+      </div>
+
+      <section class="section" aria-labelledby="top-heading">
+        <div class="section-head">
+          <h2 id="top-heading">Top links</h2>
+          <span class="aside" id="top-aside"></span>
+        </div>
+        <div id="top-links" class="ledger-wrap" aria-live="polite"></div>
+      </section>
+
+      <section class="section" aria-labelledby="recent-heading">
+        <div class="section-head">
+          <h2 id="recent-heading">Recent clicks</h2>
+          <span class="aside">count · time · referrer</span>
+        </div>
+        <div id="recent-clicks" aria-live="polite"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Snap — short links, kept score.</span>
+      <span>refreshed just now</span>
+    </div>
+  </footer>
+
+  <div class="live" aria-live="polite" id="live-region"></div>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

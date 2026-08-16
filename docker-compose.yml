@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: snap
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d snap"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - snap_pgdata:/var/lib/postgresql/data
+
+volumes:
+  snap_pgdata:
