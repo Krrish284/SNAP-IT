@@ -23,7 +23,7 @@ from app.routers import redirect as redirect_router
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
-PUBLIC_DIR = Path(__file__).resolve().parent.parent / "public"
+PUBLIC_DIR = Path(__file__).resolve().parent.parent / "assets"
 
 
 @asynccontextmanager
